@@ -15,6 +15,7 @@ public class enemyAttack : MonoBehaviour
     public Material defautMaterial;
     public Material allerdMaterial;
     public Renderer ren;
+
     private bool foundPlayer;
 
     private void Awake()
@@ -38,8 +39,9 @@ public class enemyAttack : MonoBehaviour
             enemyScript.badGuy.SetDestination(player.position);
             foundPlayer = true;
         }
-        else
+        else if(foundPlayer)
         {
+            // only after chasing, give new random coordinate after no longer being in range of player
             ren.sharedMaterial = defautMaterial;
             enemyScript.newLocation();
             foundPlayer = false;

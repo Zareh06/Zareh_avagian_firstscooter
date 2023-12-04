@@ -9,12 +9,12 @@ public class enemy : MonoBehaviour
     
     public NavMeshAgent badGuy;
 
-    public float sqareOfmovement = 20f;
+    public float sqareOfmovement = 250f;
 
-    public float xMin;
-    public float xMax;
-    public float zMin;
-    public float zMax;
+    private float xMin;
+    private float xMax;
+    private float zMin;
+    private float zMax;
 
     private float yposistion;
     private float zposistion;

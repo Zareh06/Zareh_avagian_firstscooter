@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3db97dbffd8e40349bea6a45288a2601, type: 2}
+  - {fileID: 2100000, guid: e80ce7032951876489bd3ae8591f5049, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -123,11 +123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   badGuy: {fileID: 4590895510843274348}
-  xMin: -20
-  xMax: 20
-  zMin: -20
-  zMax: 20
-  closeEnhouf: 3
+  sqareOfmovement: 250
+  closeEnhouf: 10
 --- !u!195 &4590895510843274348
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -162,7 +159,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d541f908549379f4bb91f44ef5cde6e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   atackRange: 6
   defautMaterial: {fileID: 2100000, guid: e80ce7032951876489bd3ae8591f5049, type: 2}
   allerdMaterial: {fileID: 2100000, guid: 3db97dbffd8e40349bea6a45288a2601, type: 2}
