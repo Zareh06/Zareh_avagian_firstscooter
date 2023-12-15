@@ -3,7 +3,7 @@ using TMPro;
 
 public class AmmoManager : MonoBehaviour
 {
-    public int maxAmmo = 10;
+    public int maxAmmo = 10;  
     private int currentAmmo;
 
     public TextMeshProUGUI ammoText;

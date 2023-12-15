@@ -1,50 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class enemyAttack : MonoBehaviour
 {
     private Transform player;
-
-    public float atackRange = 10f;
+    public float attackRange = 10f;
 
     private enemy enemyScript;
+    private PlayerHealth playerHealth; // Reference to the PlayerHealth script
 
-
-    public Material defautMaterial;
-    public Material allerdMaterial;
+    public Material defaultmaterial;
+    public Material alertmaterial;
     public Renderer ren;
-
-    private bool foundPlayer;
+    public bool foundPlayer = false;
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        ren = GetComponent<Renderer>();
         enemyScript = GetComponent<enemy>();
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-      
+        ren = GetComponent<Renderer>();
+
+        // Get the PlayerHealth script component
+        playerHealth = player.GetComponent<PlayerHealth>();
+        if (playerHealth == null)
+        {
+            Debug.LogError("PlayerHealth script not found on the player GameObject.");
+        }
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+
+    }
+
     void Update()
     {
-        if (Vector3.Distance(transform.position,player.position) <= atackRange)
+        if (Vector3.Distance(transform.position, player.position) <= attackRange)
         {
-            ren.sharedMaterial = allerdMaterial;
-            enemyScript.badGuy.SetDestination(player.position);
-            foundPlayer = true;
+            ren.sharedMaterial = alertmaterial; // change material
+            enemyScript.badGuy.SetDestination(player.position); // set destination to player position
+            foundPlayer = true; // enable bool for chasing
+
+            // Call TakeDamage from PlayerHealth when the enemy is in attack range
+            playerHealth.TakeDamage();
         }
-        else if(foundPlayer)
+        else if (foundPlayer)
         {
-            // only after chasing, give new random coordinate after no longer being in range of player
-            ren.sharedMaterial = defautMaterial;
-            enemyScript.newLocation();
-            foundPlayer = false;
+            ren.sharedMaterial = defaultmaterial; // change material
+            enemyScript.newLocation(); // get new location
+            foundPlayer = false; // disable bool for chasing
         }
     }
 }

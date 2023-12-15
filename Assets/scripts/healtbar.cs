@@ -1,37 +1,87 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-
-public class HealthBar : MonoBehaviour
+ 
+public class PlayerHealth : MonoBehaviour
 {
-    public Image healthBarFill;
-    public float maxHealth = 100f;
-    private float currentHealth;
+    public int maxHealth = 100;
 
-    void Start()
+    public int currentHealth;
+
+    public Slider healthBar;
+
+    private float timeBetweenDamage = 5f;
+
+    private float timer = 0f;
+
+    private void Start()
+
     {
+
         currentHealth = maxHealth;
+
         UpdateHealthBar();
+
     }
 
-    void UpdateHealthBar()
+    private void Update()
+
     {
-        float fillAmount = currentHealth / maxHealth;
-        healthBarFill.fillAmount = fillAmount;
+        if (timer >= timeBetweenDamage)
+        {
+            // No need to decrease health here anymore
+
+            timer = 0f;
+
+        }
+
+        else
+
+        {
+
+            timer += Time.deltaTime;
+
+        }
+
     }
 
-    public void TakeDamage(float damageAmount)
+    public void TakeDamage()
+
     {
-        currentHealth -= damageAmount;
-        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+
+        // Decrease health when called by enemyAttack script
+
+        currentHealth -= 1; // Adjust as needed
+
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        // Update health bar
+
         UpdateHealthBar();
+
+        // Check if the player is dead
+
+        if (currentHealth <= 0)
+
+        {
+
+            // Handle player death (e.g., game over)
+
+            SceneManager.LoadScene("Menu");
+
+        }
+
     }
 
-    public void Heal(float healAmount)
+    private void UpdateHealthBar()
+
     {
-        currentHealth += healAmount;
-        currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
-        UpdateHealthBar();
+
+        // Update the health bar UI
+
+        healthBar.value = (float)currentHealth / maxHealth;
+
     }
+
 }
+

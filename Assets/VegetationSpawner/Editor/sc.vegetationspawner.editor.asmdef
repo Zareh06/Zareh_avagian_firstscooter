@@ -1,7 +1,7 @@
 {
     "name": "sc.vegetationspawner.editor",
     "references": [
-        "sc.vegetationspawner.runtime"
+        "sc.vegetationspawner.runtime"s
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [
